@@ -20,8 +20,6 @@ ID	$("#id")	$("#nama"), $("#formDaftar"), $("#kartu")	Tepat 1 elemen
 Class	$(".class")	$(".error"), $(".field")	Semua elemen ber-class itu
 Tag	$("tag")	$("<div>"), $("<p>") (saat membuat elemen)	Semua tag itu
 
-Ingat: # untuk satu elemen (unik), . untuk banyak elemen.
-
 3. Event
 Event	Dipakai di	Fungsinya
 submit	$("#formDaftar").submit(...)	Menjalankan validasi saat form dikirim
