@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pendaftaran Workshop Web Programming | SMK Nusantara</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f2f6fb;
+      --card: #fff;
+      --ink: #12202f;
+      --muted: #566a80;
+      --line: #d9e3ee;
+      --navy: #0b2e5c;
+      --blue: #0a69b0;
+      --gold: #f2b705;
+      --soft: #e3eef9;
+      --err: #c4332f;
+      --ok: #17915a;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0d1520;
+        --card: #162233;
+        --ink: #e8eef7;
+        --muted: #9db0c6;
+        --line: #27384f;
+        --blue: #5cb3f4;
+        --soft: #1b2d44;
+        --err: #ff7b75;
+        --ok: #4cd697
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0d1520;
+      --card: #162233;
+      --ink: #e8eef7;
+      --muted: #9db0c6;
+      --line: #27384f;
+      --blue: #5cb3f4;
+      --soft: #1b2d44;
+      --err: #ff7b75;
+      --ok: #4cd697
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 400 16px/1.6 "Bricolage Grotesque", system-ui, sans-serif
+    }
+
+    .in {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 20px
+    }
+
+    .top {
+      background: var(--navy);
+      color: #cfe0f5;
+      font-size: .82rem
+    }
+
+    .top .in {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 7px;
+      padding-bottom: 7px
+    }
+
+    header.nav {
+      background: var(--card);
+      border-bottom: 4px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 5
+    }
+
+    header.nav .in {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 12px;
+      padding-bottom: 12px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .brand b {
+      display: block;
+      font-size: 1.1rem;
+      line-height: 1.15;
+      color: var(--navy)
+    }
+
+    .brand small {
+      color: var(--muted)
+    }
+
+    @media(prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) .brand b {
+        color: #fff
+      }
+    }
+
+    nav {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap
+    }
+
+    nav a {
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .92rem
+    }
+
+    nav a:hover {
+      background: var(--soft)
+    }
+
+    nav a.on {
+      background: var(--navy);
+      color: #fff
+    }
+
+    @media(max-width:860px) {
+      nav a:not(.on) {
+        display: none
+      }
+    }
+
+    .hero {
+      background: linear-gradient(110deg, var(--navy) 55%, #124a8c);
+      color: #fff;
+      padding: 44px 0 80px
+    }
+
+    .hero p.k {
+      margin: 0 0 8px;
+      color: var(--gold);
+      font-weight: 600
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -.03em
+    }
+
+    .hero p.d {
+      margin: 0;
+      max-width: 56ch;
+      color: #cfe0f5
+    }
+
+    .chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px
+    }
+
+    .chips span {
+      background: rgba(255, 255, 255, .12);
+      border: 1px solid rgba(255, 255, 255, .25);
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: .88rem
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 28px;
+      align-items: start;
+      margin-top: -48px;
+      padding-bottom: 56px
+    }
+
+    @media(max-width:820px) {
+      .grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 12px 30px -18px rgba(10, 60, 110, .5)
+    }
+
+    .panel h2 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      color: var(--navy);
+      padding-left: 10px;
+      border-left: 4px solid var(--gold)
+    }
+
+    @media(prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) .panel h2 {
+        color: #fff
+      }
+    }
+
+    .side {
+      display: grid;
+      gap: 20px
+    }
+
+    .rules {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px
+    }
+
+    .rules li {
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--blue);
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-size: .95rem
+    }
+
+    .rules b {
+      display: block
+    }
+
+    .rules span {
+      color: var(--muted);
+      font-size: .88rem
+    }
+
+    .info {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: .93rem
+    }
+
+    .info li {
+      margin: 4px 0
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-top: 14px;
+      font-size: .93rem
+    }
+
+    label i {
+      font-weight: 400;
+      color: var(--muted);
+      font-style: normal
+    }
+
+    input[type=text],
+    select {
+      width: 100%;
+      margin-top: 5px;
+      padding: 11px 12px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--ink);
+      font: inherit
+    }
+
+    input:focus,
+    select:focus,
+    button:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--blue) 45%, transparent);
+      outline-offset: 1px
+    }
+
+    .field.aktif {
+      border-color: var(--blue)
+    }
+
+    .field.salah {
+      border-color: var(--err);
+      background: color-mix(in srgb, var(--err) 8%, var(--bg))
+    }
+
+    .error {
+      display: block;
+      color: var(--err);
+      font-size: .85rem;
+      min-height: 1.1em;
+      margin-top: 4px
+    }
+
+    .cek {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-weight: 400
+    }
+
+    .cek input {
+      margin-top: 5px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--blue)
+    }
+
+    .btns {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px
+    }
+
+    button {
+      font: 600 1rem "Bricolage Grotesque", sans-serif;
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 20px;
+      cursor: pointer;
+      background: var(--navy);
+      color: #fff
+    }
+
+    button.sec {
+      background: var(--soft);
+      color: var(--blue)
+    }
+
+    .hover-aktif {
+      filter: brightness(1.2)
+    }
+
+    .kartu-ok {
+      margin-top: 20px;
+      background: var(--card);
+      border: 2px dashed var(--ok);
+      border-radius: 16px;
+      padding: 20px;
+      animation: muncul .35s ease
+    }
+
+    @keyframes muncul {
+      from {
+        transform: scale(.96);
+        opacity: 0
+      }
+
+      to {
+        transform: none;
+        opacity: 1
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      .kartu-ok {
+        animation: none
+      }
+    }
+
+    .kartu-ok h3 {
+      color: var(--ok);
+      margin: 0 0 10px
+    }
+
+    .kartu-ok p {
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .kartu-ok p span {
+      color: var(--muted)
+    }
+
+    .kartu-ok button {
+      margin-top: 14px
+    }
+
+    footer {
+      background: var(--navy);
+      color: #cfe0f5;
+      font-size: .88rem
+    }
+
+    footer .in {
+      padding-top: 22px;
+      padding-bottom: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top">
+    <div class="in"><span>PPDB &amp; Kegiatan Siswa 2026/2027</span><span>(0561) 000-000 ·
+        info@smknusantara.sch.id</span></div>
+  </div>
+
+  <header class="nav">
+    <div class="in">
+      <div class="brand">
+        <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+          <path d="M22 3 39 9v13c0 10-7 16-17 19C12 38 5 32 5 22V9z" fill="#0b2e5c" stroke="#f2b705"
+            stroke-width="2.5" />
+          <path d="M13 22l9-5 9 5-9 5z M17 25v5c3 2 7 2 10 0v-5" fill="none" stroke="#f2b705" stroke-width="2"
+            stroke-linejoin="round" />
+        </svg>
+        <div><b>SMK Nusantara</b><small>Sekolah Menengah Kejuruan</small></div>
+      </div>
+      <nav><a class="on">Workshop</a></nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="in">
+      <p class="k">Kegiatan Sekolah</p>
+      <h1>Pendaftaran Workshop<br>Web Programming</h1>
+      <p class="d">Belajar membuat halaman web interaktif bersama tim IT sekolah. Isi formulir di bawah untuk
+        mengamankan kursimu.</p>
+    </div>
+  </section>
+
+  <main class="in grid">
+    <div class="side">
+      <div class="panel">
+        <h2>Syarat pendaftaran</h2>
+        <ul class="rules">
+          <li><b>Nama ≥ 3 huruf</b><span>Bukan "Aa" atau "X".</span></li>
+          <li><b>Email mengandung @ dan .</b><span>Contoh: budi@sekolah.id</span></li>
+          <li><b>No. HP boleh kosong</b><span>Tetapi kalau diisi, harus angka.</span></li>
+          <li><b>Sesi wajib dipilih</b><span>Pagi, Siang, atau Malam.</span></li>
+          <li><b>Persetujuan wajib dicentang</b><span>Tata tertib workshop.</span></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>Informasi</h2>
+        <ul class="info">
+          <li>Peserta: siswa SMK Nusantara.</li>
+          <li>Tempat: Laboratorium Komputer.</li>
+          <li>Setelah mendaftar, simpan kartu konfirmasi yang muncul di halaman.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <form class="panel" id="formDaftar" novalidate>
+        <h2>Formulir pendaftaran</h2>
+        <label for="nama">Nama lengkap</label>
+        <input type="text" id="nama" class="field" autocomplete="off">
+        <small class="error" id="err-nama" aria-live="polite"></small>
+
+        <label for="email">Email</label>
+        <input type="text" id="email" class="field" autocomplete="off">
+        <small class="error" id="err-email" aria-live="polite"></small>
+
+        <label for="hp">No. HP <i>(opsional)</i></label>
+        <input type="text" id="hp" class="field" inputmode="numeric" autocomplete="off">
+        <small class="error" id="err-hp" aria-live="polite"></small>
+
+        <label for="sesi">Sesi</label>
+        <select id="sesi" class="field">
+          <option value="">-- Pilih sesi --</option>
+          <option>Pagi</option>
+          <option>Siang</option>
+          <option>Malam</option>
+        </select>
+        <small class="error" id="err-sesi" aria-live="polite"></small>
+
+        <label class="cek"><input type="checkbox" id="setuju" class="field"> Saya setuju mengikuti tata tertib
+          workshop.</label>
+        <small class="error" id="err-setuju" aria-live="polite"></small>
+
+        <div class="btns">
+          <button type="submit" id="btnDaftar">Daftar sekarang</button>
+          <button type="button" class="sec" id="btnReset">Kosongkan</button>
+        </div>
+      </form>
+      <div id="kartu"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="in"><span>© 2026 SMK Nusantara</span><span>Jl. Pendidikan No. 1</span></div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      function tampilError(id, pesan) {
+        $("#err-" + id).text(pesan);
+        $("#" + id).addClass("salah");
+      }
+      function baris(label, nilai) {
+        return $("<p>").append($("<span>").text(label), $("<b>").text(nilai));
+      }
+
+      $("#formDaftar").submit(function (event) {
+        event.preventDefault();
+        var nama = $("#nama").val().trim();
+        var email = $("#email").val().trim();
+        var hp = $("#hp").val().trim();
+        var sesi = $("#sesi").val();
+        var setuju = $("#setuju").prop("checked");
+        var valid = true;
+
+        $(".error").text("");
+        $(".field").removeClass("salah");
+
+        if (nama.length < 3) { tampilError("nama", "Nama wajib diisi, minimal 3 huruf."); valid = false; }
+        var at = email.indexOf("@");
+        if (at === -1 || email.indexOf(".", at) === -1) { tampilError("email", "Email harus memuat @ dan titik, contoh: budi@sekolah.id"); valid = false; }
+        if (hp !== "" && !/^[0-9]+$/.test(hp)) { tampilError("hp", "No. HP hanya boleh berisi angka."); valid = false; }
+        if (sesi === "") { tampilError("sesi", "Pilih salah satu sesi."); valid = false; }
+        if (!setuju) { tampilError("setuju", "Centang persetujuan untuk melanjutkan."); valid = false; }
+
+        if (valid) {
+          $("#kartu").empty().append(
+            $("<div>").addClass("kartu-ok").append(
+              $("<h3>").text("Pendaftaran berhasil!"),
+              baris("Nama", nama),
+              baris("Email", email),
+              baris("No. HP", hp === "" ? "-" : hp),
+              baris("Sesi", sesi),
+              $("<button>").attr("type", "button").addClass("sec tutup").text("Tutup kartu")
+            )
+          );
+          $("#formDaftar").trigger("reset");
+          $(".field").removeClass("aktif");
+        }
+      });
+
+      $("#btnReset").click(function () {
+        $("#formDaftar").trigger("reset");
+        $(".error").text("");
+        $(".field").removeClass("salah aktif");
+        $("#kartu").empty();
+      });
+
+      $("#btnDaftar").mouseover(function () { $(this).addClass("hover-aktif"); })
+        .mouseout(function () { $(this).removeClass("hover-aktif"); });
+
+      $(".field").focus(function () { $(this).removeClass("salah").addClass("aktif"); });
+      $("#nama").blur(function () {
+        $(this).removeClass("aktif");
+        if ($(this).val().trim() === "") { tampilError("nama", "Kamu keluar tanpa mengisi nama!"); }
+        else { $("#err-nama").text(""); }
+      });
+
+      $("#kartu").on("click", ".tutup", function () { $("#kartu").empty(); });
+    });
+  </script>
+</body>
+
+</html>
